@@ -1,4 +1,5 @@
-﻿
+﻿@model HadithSearch.Models.AUTHENTICITE
+
 @{
     ViewBag.Title = "AjouterAuthenticite";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,15 +28,12 @@
             <tr>
                 <th>Degré d'authenticité</th>
             </tr>
-            <tr>
-                <th>AUTEUR 2</th>
-
-
-            </tr>
-            <tr>
-                <th>AUTEUR 3 </th>
-
-            </tr>
+            @foreach (var data in ViewBag.listeAuthenticite)
+            {
+                <tr>
+                    <td>@data.DEGRE_AUTHEN</td>
+                </tr>
+            }
         </table>
     </div>
 </div>

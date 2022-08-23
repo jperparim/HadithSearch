@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_HADITHSEARCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTEUR">
+          <Key>
+            <PropertyRef Name="ID_AUTEUR" />
+          </Key>
+          <Property Name="ID_AUTEUR" Type="int" Nullable="false" />
+          <Property Name="NOM_AUTEUR" Type="nvarchar(max)" />
+          <Property Name="DATE_AUTEUR" Type="nvarchar(max)" />
+          <Property Name="BIOGRAPHIE_AUTEUR" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AUTHENTICITE">
+          <Key>
+            <PropertyRef Name="ID_DEGRE" />
+          </Key>
+          <Property Name="ID_DEGRE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DEGRE_AUTHEN" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CHAPITRE">
+          <Key>
+            <PropertyRef Name="ID_CHAPITRE" />
+          </Key>
+          <Property Name="ID_CHAPITRE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUMERO_CHAPITRE" Type="int" />
+          <Property Name="TITRE_CHAPITRE" Type="nvarchar(max)" />
+          <Property Name="HADITH_CHAPITRE" Type="int" />
+          <Property Name="RECUEIL_CHAPITRE" Type="int" />
+        </EntityType>
+        <EntityType Name="HADITH">
+          <Key>
+            <PropertyRef Name="ID_HADITH" />
+          </Key>
+          <Property Name="ID_HADITH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUMERO_HADITH" Type="int" />
+          <Property Name="TRANSMETTEUR_HADITH" Type="int" />
+          <Property Name="TEXTE_HADITH" Type="nvarchar(max)" />
+          <Property Name="AUTHENTICITE_HADITH" Type="int" />
+          <Property Name="COMMENTAIRE_HADITH" Type="nvarchar(max)" />
+          <Property Name="CHAPITRE_HADITH" Type="int" />
+          <Property Name="RECUEIL_HADITH" Type="int" />
+        </EntityType>
+        <EntityType Name="RECUEIL">
+          <Key>
+            <PropertyRef Name="ID_RECUEIL" />
+          </Key>
+          <Property Name="ID_RECUEIL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TITRE_RECUEIL" Type="nvarchar(max)" />
+          <Property Name="AUTEUR_RECUEIL" Type="int" />
+          <Property Name="CHAPITRE_RECUEIL" Type="int" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'DB_HADITHSEARCH.dbo.RECUEIL_HADITH' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="RECUEIL_HADITH">
+          <Property Name="HADITH_RECUEIL" Type="int" />
+          <Property Name="RECUEIL_HADITH" Type="int" />
+        </EntityType>-->
+        <EntityType Name="TRANSMETTEUR">
+          <Key>
+            <PropertyRef Name="ID_TRANSMETTEUR" />
+          </Key>
+          <Property Name="ID_TRANSMETTEUR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_TRANSMETTEUR" Type="nvarchar(max)" />
+          <Property Name="DATE_TRANSMETTEUR" Type="nvarchar(max)" />
+          <Property Name="BIOGRAPHIE_TRANSMETTEUR" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__CHAPITRE_HADITH">
+          <End Role="CHAPITRE" Type="Self.CHAPITRE" Multiplicity="0..1" />
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHAPITRE">
+              <PropertyRef Name="ID_CHAPITRE" />
+            </Principal>
+            <Dependent Role="HADITH">
+              <PropertyRef Name="CHAPITRE_HADITH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AUTHENTICITE_HADITH">
+          <End Role="AUTHENTICITE" Type="Self.AUTHENTICITE" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTHENTICITE">
+              <PropertyRef Name="ID_DEGRE" />
+            </Principal>
+            <Dependent Role="HADITH">
+              <PropertyRef Name="AUTHENTICITE_HADITH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HADITH_CHAPITRE">
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="0..1" />
+          <End Role="CHAPITRE" Type="Self.CHAPITRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HADITH">
+              <PropertyRef Name="ID_HADITH" />
+            </Principal>
+            <Dependent Role="CHAPITRE">
+              <PropertyRef Name="HADITH_CHAPITRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HADITH_RECUEIL">
+          <End Role="RECUEIL" Type="Self.RECUEIL" Multiplicity="0..1" />
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECUEIL">
+              <PropertyRef Name="ID_RECUEIL" />
+            </Principal>
+            <Dependent Role="HADITH">
+              <PropertyRef Name="RECUEIL_HADITH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HADITH_TRANSMETTEUR">
+          <End Role="TRANSMETTEUR" Type="Self.TRANSMETTEUR" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSMETTEUR">
+              <PropertyRef Name="ID_TRANSMETTEUR" />
+            </Principal>
+            <Dependent Role="HADITH">
+              <PropertyRef Name="TRANSMETTEUR_HADITH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECUEIL_CHAPITRE">
+          <End Role="RECUEIL" Type="Self.RECUEIL" Multiplicity="0..1" />
+          <End Role="CHAPITRE" Type="Self.CHAPITRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECUEIL">
+              <PropertyRef Name="ID_RECUEIL" />
+            </Principal>
+            <Dependent Role="CHAPITRE">
+              <PropertyRef Name="RECUEIL_CHAPITRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_HADITHSEARCHModelStoreContainer">
+          <EntitySet Name="AUTEUR" EntityType="Self.AUTEUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AUTHENTICITE" EntityType="Self.AUTHENTICITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHAPITRE" EntityType="Self.CHAPITRE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HADITH" EntityType="Self.HADITH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECUEIL" EntityType="Self.RECUEIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSMETTEUR" EntityType="Self.TRANSMETTEUR" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CHAPITRE_HADITH" Association="Self.FK__CHAPITRE_HADITH">
+            <End Role="CHAPITRE" EntitySet="CHAPITRE" />
+            <End Role="HADITH" EntitySet="HADITH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AUTHENTICITE_HADITH" Association="Self.FK_AUTHENTICITE_HADITH">
+            <End Role="AUTHENTICITE" EntitySet="AUTHENTICITE" />
+            <End Role="HADITH" EntitySet="HADITH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HADITH_CHAPITRE" Association="Self.FK_HADITH_CHAPITRE">
+            <End Role="HADITH" EntitySet="HADITH" />
+            <End Role="CHAPITRE" EntitySet="CHAPITRE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HADITH_RECUEIL" Association="Self.FK_HADITH_RECUEIL">
+            <End Role="RECUEIL" EntitySet="RECUEIL" />
+            <End Role="HADITH" EntitySet="HADITH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HADITH_TRANSMETTEUR" Association="Self.FK_HADITH_TRANSMETTEUR">
+            <End Role="TRANSMETTEUR" EntitySet="TRANSMETTEUR" />
+            <End Role="HADITH" EntitySet="HADITH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECUEIL_CHAPITRE" Association="Self.FK_RECUEIL_CHAPITRE">
+            <End Role="RECUEIL" EntitySet="RECUEIL" />
+            <End Role="CHAPITRE" EntitySet="CHAPITRE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_HADITHSEARCHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AUTEUR">
+          <Key>
+            <PropertyRef Name="ID_AUTEUR" />
+          </Key>
+          <Property Name="ID_AUTEUR" Type="Int32" Nullable="false" />
+          <Property Name="NOM_AUTEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_AUTEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BIOGRAPHIE_AUTEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AUTHENTICITE">
+          <Key>
+            <PropertyRef Name="ID_DEGRE" />
+          </Key>
+          <Property Name="ID_DEGRE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DEGRE_AUTHEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HADITH" Relationship="Self.FK_AUTHENTICITE_HADITH" FromRole="AUTHENTICITE" ToRole="HADITH" />
+        </EntityType>
+        <EntityType Name="CHAPITRE">
+          <Key>
+            <PropertyRef Name="ID_CHAPITRE" />
+          </Key>
+          <Property Name="ID_CHAPITRE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUMERO_CHAPITRE" Type="Int32" />
+          <Property Name="TITRE_CHAPITRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HADITH_CHAPITRE" Type="Int32" />
+          <Property Name="RECUEIL_CHAPITRE" Type="Int32" />
+          <NavigationProperty Name="HADITH" Relationship="Self.FK__CHAPITRE_HADITH" FromRole="CHAPITRE" ToRole="HADITH" />
+          <NavigationProperty Name="HADITH1" Relationship="Self.FK_HADITH_CHAPITRE" FromRole="CHAPITRE" ToRole="HADITH" />
+          <NavigationProperty Name="RECUEIL" Relationship="Self.FK_RECUEIL_CHAPITRE" FromRole="CHAPITRE" ToRole="RECUEIL" />
+        </EntityType>
+        <EntityType Name="HADITH">
+          <Key>
+            <PropertyRef Name="ID_HADITH" />
+          </Key>
+          <Property Name="ID_HADITH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUMERO_HADITH" Type="Int32" />
+          <Property Name="TRANSMETTEUR_HADITH" Type="Int32" />
+          <Property Name="TEXTE_HADITH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AUTHENTICITE_HADITH" Type="Int32" />
+          <Property Name="COMMENTAIRE_HADITH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CHAPITRE_HADITH" Type="Int32" />
+          <Property Name="RECUEIL_HADITH" Type="Int32" />
+          <NavigationProperty Name="AUTHENTICITE" Relationship="Self.FK_AUTHENTICITE_HADITH" FromRole="HADITH" ToRole="AUTHENTICITE" />
+          <NavigationProperty Name="CHAPITRE" Relationship="Self.FK__CHAPITRE_HADITH" FromRole="HADITH" ToRole="CHAPITRE" />
+          <NavigationProperty Name="CHAPITRE1" Relationship="Self.FK_HADITH_CHAPITRE" FromRole="HADITH" ToRole="CHAPITRE" />
+          <NavigationProperty Name="RECUEIL" Relationship="Self.FK_HADITH_RECUEIL" FromRole="HADITH" ToRole="RECUEIL" />
+          <NavigationProperty Name="TRANSMETTEUR" Relationship="Self.FK_HADITH_TRANSMETTEUR" FromRole="HADITH" ToRole="TRANSMETTEUR" />
+        </EntityType>
+        <EntityType Name="RECUEIL">
+          <Key>
+            <PropertyRef Name="ID_RECUEIL" />
+          </Key>
+          <Property Name="ID_RECUEIL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE_RECUEIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AUTEUR_RECUEIL" Type="Int32" />
+          <Property Name="CHAPITRE_RECUEIL" Type="Int32" />
+          <NavigationProperty Name="CHAPITRE" Relationship="Self.FK_RECUEIL_CHAPITRE" FromRole="RECUEIL" ToRole="CHAPITRE" />
+          <NavigationProperty Name="HADITH" Relationship="Self.FK_HADITH_RECUEIL" FromRole="RECUEIL" ToRole="HADITH" />
+        </EntityType>
+        <EntityType Name="TRANSMETTEUR">
+          <Key>
+            <PropertyRef Name="ID_TRANSMETTEUR" />
+          </Key>
+          <Property Name="ID_TRANSMETTEUR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_TRANSMETTEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_TRANSMETTEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BIOGRAPHIE_TRANSMETTEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HADITH" Relationship="Self.FK_HADITH_TRANSMETTEUR" FromRole="TRANSMETTEUR" ToRole="HADITH" />
+        </EntityType>
+        <Association Name="FK_AUTHENTICITE_HADITH">
+          <End Role="AUTHENTICITE" Type="Self.AUTHENTICITE" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTHENTICITE">
+              <PropertyRef Name="ID_DEGRE" />
+            </Principal>
+            <Dependent Role="HADITH">
+              <PropertyRef Name="AUTHENTICITE_HADITH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CHAPITRE_HADITH">
+          <End Role="CHAPITRE" Type="Self.CHAPITRE" Multiplicity="0..1" />
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHAPITRE">
+              <PropertyRef Name="ID_CHAPITRE" />
+            </Principal>
+            <Dependent Role="HADITH">
+              <PropertyRef Name="CHAPITRE_HADITH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HADITH_CHAPITRE">
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="0..1" />
+          <End Role="CHAPITRE" Type="Self.CHAPITRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HADITH">
+              <PropertyRef Name="ID_HADITH" />
+            </Principal>
+            <Dependent Role="CHAPITRE">
+              <PropertyRef Name="HADITH_CHAPITRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECUEIL_CHAPITRE">
+          <End Role="RECUEIL" Type="Self.RECUEIL" Multiplicity="0..1" />
+          <End Role="CHAPITRE" Type="Self.CHAPITRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECUEIL">
+              <PropertyRef Name="ID_RECUEIL" />
+            </Principal>
+            <Dependent Role="CHAPITRE">
+              <PropertyRef Name="RECUEIL_CHAPITRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HADITH_RECUEIL">
+          <End Role="RECUEIL" Type="Self.RECUEIL" Multiplicity="0..1" />
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECUEIL">
+              <PropertyRef Name="ID_RECUEIL" />
+            </Principal>
+            <Dependent Role="HADITH">
+              <PropertyRef Name="RECUEIL_HADITH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HADITH_TRANSMETTEUR">
+          <End Role="TRANSMETTEUR" Type="Self.TRANSMETTEUR" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HADITH" Type="Self.HADITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSMETTEUR">
+              <PropertyRef Name="ID_TRANSMETTEUR" />
+            </Principal>
+            <Dependent Role="HADITH">
+              <PropertyRef Name="TRANSMETTEUR_HADITH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_HADITHSEARCHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AUTEUR" EntityType="Self.AUTEUR" />
+          <EntitySet Name="AUTHENTICITE" EntityType="Self.AUTHENTICITE" />
+          <EntitySet Name="CHAPITRE" EntityType="Self.CHAPITRE" />
+          <EntitySet Name="HADITH" EntityType="Self.HADITH" />
+          <EntitySet Name="RECUEIL" EntityType="Self.RECUEIL" />
+          <EntitySet Name="TRANSMETTEUR" EntityType="Self.TRANSMETTEUR" />
+          <AssociationSet Name="FK_AUTHENTICITE_HADITH" Association="Self.FK_AUTHENTICITE_HADITH">
+            <End Role="AUTHENTICITE" EntitySet="AUTHENTICITE" />
+            <End Role="HADITH" EntitySet="HADITH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CHAPITRE_HADITH" Association="Self.FK__CHAPITRE_HADITH">
+            <End Role="CHAPITRE" EntitySet="CHAPITRE" />
+            <End Role="HADITH" EntitySet="HADITH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HADITH_CHAPITRE" Association="Self.FK_HADITH_CHAPITRE">
+            <End Role="HADITH" EntitySet="HADITH" />
+            <End Role="CHAPITRE" EntitySet="CHAPITRE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECUEIL_CHAPITRE" Association="Self.FK_RECUEIL_CHAPITRE">
+            <End Role="RECUEIL" EntitySet="RECUEIL" />
+            <End Role="CHAPITRE" EntitySet="CHAPITRE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HADITH_RECUEIL" Association="Self.FK_HADITH_RECUEIL">
+            <End Role="RECUEIL" EntitySet="RECUEIL" />
+            <End Role="HADITH" EntitySet="HADITH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HADITH_TRANSMETTEUR" Association="Self.FK_HADITH_TRANSMETTEUR">
+            <End Role="TRANSMETTEUR" EntitySet="TRANSMETTEUR" />
+            <End Role="HADITH" EntitySet="HADITH" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_HADITHSEARCHModelStoreContainer" CdmEntityContainer="DB_HADITHSEARCHEntities">
+          <EntitySetMapping Name="AUTEUR">
+            <EntityTypeMapping TypeName="DB_HADITHSEARCHModel.AUTEUR">
+              <MappingFragment StoreEntitySet="AUTEUR">
+                <ScalarProperty Name="ID_AUTEUR" ColumnName="ID_AUTEUR" />
+                <ScalarProperty Name="NOM_AUTEUR" ColumnName="NOM_AUTEUR" />
+                <ScalarProperty Name="DATE_AUTEUR" ColumnName="DATE_AUTEUR" />
+                <ScalarProperty Name="BIOGRAPHIE_AUTEUR" ColumnName="BIOGRAPHIE_AUTEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AUTHENTICITE">
+            <EntityTypeMapping TypeName="DB_HADITHSEARCHModel.AUTHENTICITE">
+              <MappingFragment StoreEntitySet="AUTHENTICITE">
+                <ScalarProperty Name="ID_DEGRE" ColumnName="ID_DEGRE" />
+                <ScalarProperty Name="DEGRE_AUTHEN" ColumnName="DEGRE_AUTHEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHAPITRE">
+            <EntityTypeMapping TypeName="DB_HADITHSEARCHModel.CHAPITRE">
+              <MappingFragment StoreEntitySet="CHAPITRE">
+                <ScalarProperty Name="ID_CHAPITRE" ColumnName="ID_CHAPITRE" />
+                <ScalarProperty Name="NUMERO_CHAPITRE" ColumnName="NUMERO_CHAPITRE" />
+                <ScalarProperty Name="TITRE_CHAPITRE" ColumnName="TITRE_CHAPITRE" />
+                <ScalarProperty Name="HADITH_CHAPITRE" ColumnName="HADITH_CHAPITRE" />
+                <ScalarProperty Name="RECUEIL_CHAPITRE" ColumnName="RECUEIL_CHAPITRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HADITH">
+            <EntityTypeMapping TypeName="DB_HADITHSEARCHModel.HADITH">
+              <MappingFragment StoreEntitySet="HADITH">
+                <ScalarProperty Name="ID_HADITH" ColumnName="ID_HADITH" />
+                <ScalarProperty Name="NUMERO_HADITH" ColumnName="NUMERO_HADITH" />
+                <ScalarProperty Name="TRANSMETTEUR_HADITH" ColumnName="TRANSMETTEUR_HADITH" />
+                <ScalarProperty Name="TEXTE_HADITH" ColumnName="TEXTE_HADITH" />
+                <ScalarProperty Name="AUTHENTICITE_HADITH" ColumnName="AUTHENTICITE_HADITH" />
+                <ScalarProperty Name="COMMENTAIRE_HADITH" ColumnName="COMMENTAIRE_HADITH" />
+                <ScalarProperty Name="CHAPITRE_HADITH" ColumnName="CHAPITRE_HADITH" />
+                <ScalarProperty Name="RECUEIL_HADITH" ColumnName="RECUEIL_HADITH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECUEIL">
+            <EntityTypeMapping TypeName="DB_HADITHSEARCHModel.RECUEIL">
+              <MappingFragment StoreEntitySet="RECUEIL">
+                <ScalarProperty Name="ID_RECUEIL" ColumnName="ID_RECUEIL" />
+                <ScalarProperty Name="TITRE_RECUEIL" ColumnName="TITRE_RECUEIL" />
+                <ScalarProperty Name="AUTEUR_RECUEIL" ColumnName="AUTEUR_RECUEIL" />
+                <ScalarProperty Name="CHAPITRE_RECUEIL" ColumnName="CHAPITRE_RECUEIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSMETTEUR">
+            <EntityTypeMapping TypeName="DB_HADITHSEARCHModel.TRANSMETTEUR">
+              <MappingFragment StoreEntitySet="TRANSMETTEUR">
+                <ScalarProperty Name="ID_TRANSMETTEUR" ColumnName="ID_TRANSMETTEUR" />
+                <ScalarProperty Name="NOM_TRANSMETTEUR" ColumnName="NOM_TRANSMETTEUR" />
+                <ScalarProperty Name="DATE_TRANSMETTEUR" ColumnName="DATE_TRANSMETTEUR" />
+                <ScalarProperty Name="BIOGRAPHIE_TRANSMETTEUR" ColumnName="BIOGRAPHIE_TRANSMETTEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

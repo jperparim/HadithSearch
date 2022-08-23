@@ -1,4 +1,4 @@
-﻿
+﻿@model HadithSearch.Models.TRANSMETTEUR
 @{
     ViewBag.Title = "AjouterTransmetteur";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,25 +11,42 @@
 <div>
 
     <form id="formTransmetteur" name="formTransmetteur" action="" method="post">
-        <div class="form-group">
-            <label>Nom du Transmetteur</label>
-            <input type="text" id="NOM_TRANSMETTEUR" name="NOM_TRANSMETTEUR" class="form-control" required />
-        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
 
-        <div class="form-group">
-            <label>Date de naissance du transmetteur</label>
-            <textarea id="NOM_TRANSMETTEUR" name="NOM_TRANSMETTEUR" class="form-control"></textarea>
-        </div>
+                <div class="form-group">
+                    <label>Nom du Transmetteur</label>
+                    <input type="text" id="NOM_TRANSMETTEUR" name="NOM_TRANSMETTEUR" class="form-control" required />
+                </div>
+            </div>
 
-        <div class="form-group">
-            <label>Biographie du transmetteur</label>
-            <textarea id="BIOGRAPHIE_TRANSMETTEUR" name="BIOGRAPHIE_TRANSMETTEUR" class="form-control"></textarea>
-        </div>
 
-        <div>
-            <input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer" class="btn btn-primary" />
-        </div>
-    </form>
+            <div class="col-xs-12 col-sm-6">
+
+                <div class="form-group">
+                    <label>Biographie du transmetteur</label>
+                    <textarea id="BIOGRAPHIE_TRANSMETTEUR" name="BIOGRAPHIE_TRANSMETTEUR" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    <label>Date de naissance du transmetteur</label>
+                    <textarea id="DATE_TRANSMETTEUR" name="DATE_TRANSMETTEUR" class="form-control"></textarea>
+                </div>
+            </div>
+
+
+
+
+
+            </div>
+
+
+            <div>
+                <input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer" class="btn btn-primary" />
+            </div>
+</form>
 
 
     <hr />
@@ -40,18 +57,14 @@
                 <th>Date de naissance du transmetteur</th>
                 <th>Biographie du transmetteur </th>
             </tr>
-            <tr>
-                <th>TRANSMETTEUR 2</th>
-                <th>DATE DE NAISSANCE TRANSMETTEUR 2</th>
-                <th>BIOGRAPHIE TRANSMETTEUR 2</th>
-
-            </tr>
-            <tr>
-                <th>TRANSMETTEUR  3 </th>
-                <th>DATE DE NAISSANCE DE TRANSMETTEUR 3 </th>
-                <th>BIOGRAPHIE DE TRANSMETTEUR 3</th>
-
-            </tr>
+            @foreach(var data in ViewBag.listeTransmetteur)
+            {
+                <tr>
+                    <td>@data.NOM_TRANSMETTEUR</td>
+                    <td>@data.DATE_TRANSMETTEUR</td>
+                    <td>@data.BIOGRAPHIE_TRANSMETTEUR</td>
+                </tr>
+            }
         </table>
     </div>
 </div>
