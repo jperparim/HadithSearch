@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "AjouterTransmetteur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Transmetteur</h2>
+
+
+
+<div>
+
+    <form id="formTransmetteur" name="formTransmetteur" action="" method="post">
+        <div class="form-group">
+            <label>Nom du Transmetteur</label>
+            <input type="text" id="NOM_TRANSMETTEUR" name="NOM_TRANSMETTEUR" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Date de naissance du transmetteur</label>
+            <textarea id="NOM_TRANSMETTEUR" name="NOM_TRANSMETTEUR" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Biographie du transmetteur</label>
+            <textarea id="BIOGRAPHIE_TRANSMETTEUR" name="BIOGRAPHIE_TRANSMETTEUR" class="form-control"></textarea>
+        </div>
+
+        <div>
+            <input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>Nom du transmetteur </th>
+                <th>Date de naissance du transmetteur</th>
+                <th>Biographie du transmetteur </th>
+            </tr>
+            <tr>
+                <th>TRANSMETTEUR 2</th>
+                <th>DATE DE NAISSANCE TRANSMETTEUR 2</th>
+                <th>BIOGRAPHIE TRANSMETTEUR 2</th>
+
+            </tr>
+            <tr>
+                <th>TRANSMETTEUR  3 </th>
+                <th>DATE DE NAISSANCE DE TRANSMETTEUR 3 </th>
+                <th>BIOGRAPHIE DE TRANSMETTEUR 3</th>
+
+            </tr>
+        </table>
+    </div>
+</div>

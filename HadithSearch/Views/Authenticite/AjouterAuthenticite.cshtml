@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "AjouterAuthenticite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Authenticite</h2>
+
+
+<div>
+
+    <form id="formAuthenticite" name="formAuthenticite" action="" method="post">
+        <div class="form-group">
+            <label>Degré d'authenticité</label>
+            <input type="text" id="DEGRE_AUTHEN" name="DEGRE_AUTHEN" class="form-control" required />
+        </div>
+
+        <div>
+            <input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>Degré d'authenticité</th>
+            </tr>
+            <tr>
+                <th>AUTEUR 2</th>
+
+
+            </tr>
+            <tr>
+                <th>AUTEUR 3 </th>
+
+            </tr>
+        </table>
+    </div>
+</div>
+

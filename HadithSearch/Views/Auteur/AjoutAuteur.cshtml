@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "AjoutAuteur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Auteur</h2>
+
+<div>
+
+    <form id="formAuteur" name="formAuteur" action="" method="post">
+        <div class="form-group">
+            <label>Nom de l'auteur</label>
+            <input type="text" id="NOM_AUTEUR" name="NOM_AUTEUR" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Date de naissance de l'auteur</label>
+            <textarea id="DATE_AUTEUR" name="DATE_AUTEUR" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Biographie de l'auteur de l'auteur</label>
+            <textarea id="BIOGRAPHIE_AUTEUR" name="BIOGRAPHIE_AUTEUR" class="form-control"></textarea>
+        </div>
+
+        <div>
+            <input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <hr/>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>AUTEUR</th>
+                <th>DATE DE NAISSANCE DE L'AUTEUR</th>
+                <th>BIOGRAPHIE DE L'AUTEUR</th>
+            </tr>
+            <tr>
+                <th>AUTEUR 2</th>
+                <th>DATE DE NAISSANCE DE L'AUTEUR 2</th>
+                <th>BIOGRAPHIE DE L'AUTEUR 3</th>
+
+            </tr>
+            <tr>
+                <th>AUTEUR 3 </th>
+                <th>DATE DE NAISSANCE DE L'AUTEUR 3 </th>
+                <th>BIOGRAPHIE DE L'AUTEUR 3</th>
+
+            </tr>
+        </table>
+    </div>
+</div>
+

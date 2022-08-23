@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "AjouterChapitre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Chapitre</h2>
+
+
+
+<div>
+
+    <form id="formChapitre" name="formChapitre" action="" method="post">
+        <div class="form-group">
+            <label>Titre du Chapitre</label>
+            <input type="text" id="TITRE_CHAPITRE" name="TITRE_CHAPITRE" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Numéro du chapitre</label>
+            <input type="number" id="NUMERO_CHAPITRE" name="NUMERO_CHAPITRE" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>RECUEIL DU CHAPITRE</label>
+            <select id="RECUEIL_CHAPITRE" name="RECUEIL_CHAPITRE" class="form-control">
+                <option>RECUEIL 1</option>
+                <option>RECUEIL 2</option>
+                <option>RECUEIL 3</option>
+            </select>
+        </div>
+
+
+        <div>
+            <input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>TITRE DU CHAPITRE</th>
+                <th>AUTEUR DU CHAPITRE</th>
+                <th>CHAPITRE DU CHAPITRE</th>
+            </tr>
+            <tr>
+                <th>TITRE DU CHAPITRE 2</th>
+                <th>AUTEUR DU CHAPITRE 2</th>
+                <th>CHAPITRE DU CHAPITRE 2</th>
+
+            </tr>
+            <tr>
+                <th>TITRE DU CHAPITRE 3 </th>
+                <th>AUTEUR DU CHAPITRE 3 </th>
+                <th>CHAPITRE DU CHAPITRE 3</th>
+
+            </tr>
+        </table>
+    </div>
+</div>
+

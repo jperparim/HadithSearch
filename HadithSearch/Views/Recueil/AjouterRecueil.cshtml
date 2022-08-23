@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "AjouterRecueil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Recueil</h2>
+
+<div>
+
+    <form id="formRecueil" name="formRecueil" action="" method="post">
+        <div class="form-group">
+            <label>AUTEUR DU RECUEIL</label>
+            <select id="AUTEUR_RECUEIL" name="AUTEUR_RECUEIL" class="form-control">
+                <option>AUTEUR 1</option>
+                <option>AUTEUR 2</option>
+                <option>AUTEUR 3</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Titre du Recueil</label>
+            <input type="number" id="TITRE_RECUEIL" name="TITRE_RECUEIL" class="form-control" required />
+        </div>
+
+
+        <div>
+            <input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>TITRE DU RECUEIL</th>
+                <th>AUTEUR DU RECUEIL</th>
+                <th>CHAPITRE DU RECUEIL</th>
+            </tr>
+            <tr>
+                <th>TITRE DU RECUEIL 2</th>
+                <th>AUTEUR DU RECUEIL 2</th>
+                <th>CHAPITRE DU RECUEIL 2</th>
+
+            </tr>
+            <tr>
+                <th>TITRE DU RECUEIL 3 </th>
+                <th>AUTEUR DU RECUEIL 3 </th>
+                <th>CHAPITRE DU RECUEIL 3</th>
+
+            </tr>
+        </table>
+    </div>
+</div>
+

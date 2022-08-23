@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "AjouterHadith";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Hadith</h2>
+
+<div>
+
+    <form id="formHadith" name="formHadith" action="" method="post">
+
+        <div class="form-group">
+            <label>Numéro du Hadith</label>
+            <input type="number" id="NUMERO_HADITH" name="NUMERO_HADITH" class="form-control" required />
+        </div>
+
+
+        <div class="form-group">
+            <label>Transmetteur du Hadith</label>
+            <select id="TRANSMETTEUR_HADITH" name="TRANSMETTEUR_HADITH" class="form-control">
+                <option>TRANSMETTEUR 1</option>
+                <option>TRANSMETTEUR 2</option>
+                <option>TRANSMETTEUR 3</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label>Recueil du Hadith</label>
+            <select id="RECUEIL_HADITH" name="RECUEIL_HADITH" class="form-control">
+                <option>RECUEIL 1</option>
+                <option>RECUEIL 2</option>
+                <option>RECUEIL 3</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Chapitre du Hadith</label>
+            <select id="CHAPITRE_HADITH" name="CHAPITRE_HADITH" class="form-control">
+                <option>CHAPITRE 1</option>
+                <option>CHAPITRE 2</option>
+                <option>CHAPITRE 3</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Texte du Hadith</label>
+            <textarea id="TEXTE_HADITH" name="TEXTE_HADITH" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Dégré d'authenticité du Hadith</label>
+            <select id="AUTHENTICITE_HADITH" name="AUTHENTICITE_HADITH" class="form-control">
+                <option>DEGRE 1</option>
+                <option>DEGRE 2</option>
+                <option>DEGRE 3</option>
+            </select>
+        </div>
+
+
+
+
+        <div>
+            <input type="submit" name="enregistrer" id="enregistrer" value="Enregistrer" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>Numéro de Hadith</th>
+                <th>Transmetteur du Hadith</th>
+                <th>Chapitre du Hadith</th>
+                <th>Recueil du Hadith</th>
+                <th>Texte du Hadith</th>
+                <th>Degré d'authenticité du Hadith</th>
+            </tr>
+            <tr>
+                <th>TITRE DU RECUEIL 2</th>
+                <th>AUTEUR DU RECUEIL 2</th>
+                <th>CHAPITRE DU RECUEIL 2</th>
+
+            </tr>
+            <tr>
+                <th>TITRE DU RECUEIL 3 </th>
+                <th>AUTEUR DU RECUEIL 3 </th>
+                <th>CHAPITRE DU RECUEIL 3</th>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
